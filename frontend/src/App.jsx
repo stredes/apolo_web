@@ -1,18 +1,16 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import _Init_ from './components/_Init_';
-import MainApp from './components/MainApp';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ClientesList from './components/ClientesList';
+import ClienteForm from './components/ClienteForm';
+import PrintEtiqueta from './components/PrintEtiqueta';
 
 export default function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <Link to='/__init__'>_Init_</Link> |
-        <Link to='/main_app'>MainApp</Link> |
-      </nav>
       <Routes>
-        <Route path='/__init__' element={<_Init_/>}/>
-        <Route path='/main_app' element={<MainApp/>}/>
+        <Route path="/" element={<ClientesList />} />
+        <Route path="/nuevo-cliente" element={<ClienteForm />} />
+        <Route path="/imprimir-etiqueta" element={<PrintEtiqueta />} />
       </Routes>
     </BrowserRouter>
   );
