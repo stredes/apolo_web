@@ -1,6 +1,8 @@
 # Entorno virtual
 venv/
 *.env
+.vemv
+
 
 # Archivos de configuración de la IDE
 .vscode/
