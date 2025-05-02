@@ -8,7 +8,7 @@ export default function ClienteForm() {
 
   const submit = e => {
     e.preventDefault();
-    createCliente(form).then(() => nav('/'));
+    createCliente(form).then(() => nav('/'));  
   };
 
   return (

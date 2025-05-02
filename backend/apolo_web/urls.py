@@ -1,22 +1,23 @@
-from etiquetas.views import print_label
-from informes.views import ClienteViewSet
-from informes.views import MainAppViewSet
+from django.views.generic import TemplateView
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path, include
+from django.shortcuts import redirect
 from rest_framework import routers
 from informes.views import ClienteViewSet
-from etiquetas.views import print_label
+
+try:
+    from informes.views import MainAppViewSet
+except ImportError:
+    MainAppViewSet = None
 
 router = routers.DefaultRouter()
-    router.register("clientes", ClienteViewSet, basename="clientes")
-    router.register('clientes', ClienteViewSet, basename='clientes')
-    router.register('clientes', ClienteViewSet, basename='clientes')
-    router.register('clientes', ClienteViewSet, basename='clientes')
-    router.register('clientes', ClienteViewSet, basename='clientes')
+router.register('clientes', ClienteViewSet, basename='clientes')
+if MainAppViewSet:
+    router.register('main_app', MainAppViewSet, basename='main_app')
 
 urlpatterns = [
-    path("api/etiquetas/print/", print_label),
-path('admin/', admin.site.urls),
-path('api/', include(router.urls)),
-path('api/etiquetas/print/', print_label),
+    path('', TemplateView.as_view(template_name='index.html'), name='spa-root'),
+    path('', lambda req: redirect('api/', permanent=False)),
+    path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]
